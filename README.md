@@ -27,11 +27,18 @@ devdav -addr 0.0.0.0:8080 -dir /home/zinrai/share -verbose
 
 ## Mounting from a client
 
-Linux, with `davfs2`:
+Using [`rclone`](https://rclone.org/):
 
 ```
-sudo apt install davfs2
-sudo mount -t davfs http://<host>:8080 /mnt/point
+rclone config create devdav webdav url=http://<host>:8080 vendor=other
+mkdir -p ~/devdav
+rclone mount devdav: ~/devdav --daemon
+```
+
+To unmount:
+
+```
+fusermount -u ~/devdav
 ```
 
 ## Non-goals
