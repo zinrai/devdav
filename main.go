@@ -21,7 +21,13 @@ func run() error {
 	addr := flag.String("addr", "127.0.0.1:8080", "listen address (host:port)")
 	dir := flag.String("dir", ".", "directory to serve")
 	verbose := flag.Bool("verbose", false, "log file access")
+	showVersion := flag.Bool("version", false, "Print version information and exit")
 	flag.Parse()
+
+	if *showVersion {
+		printVersion()
+		os.Exit(0)
+	}
 
 	h := &webdav.Handler{
 		FileSystem: webdav.Dir(*dir),
